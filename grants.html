@@ -13,6 +13,7 @@
 
 <title>Grants</title>
 
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -59,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -79,6 +81,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -136,11 +141,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -169,8 +178,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -178,16 +187,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -231,7 +233,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -266,10 +268,26 @@ $(document).ready(function () {
 
 
 <ul>
-<li>Principal Investigator, University of California, Office of the President (Innovative Learning Technology Initiative), “Online Instruction for Introduction to Statistics - STAT 100AB,” 2018-2023, $210,000.</li>
-<li>Other Professional, National Aeronautics and Space Administration (NASA MIRO FIELDS), “Fellowships and Internships in Extremely Large Data Sets (FIELDS): A Training and Research Program in Big Data and Visualization” (PI B. Mobasher, Physics and Astronomy), 2015-2020, $4,444,837.</li>
-<li>Principal Investigator, University of California, Riverside (UCR Regents Faculty Fellowship), “A sequential stopping rule for high-dimensional Markov chain Monte Carlo,” 2014-2015, $6,000.</li>
-<li>Principal Investigator, National Science Foundation (NSF-DMS, Statistics), “Collaborative research: Developing a theoretical and methodological framework for high-dimensional Markov chain Monte Carlo,” 2013-2016, $99,998.</li>
+<li>Co-Principal Investigator, National Science Foundation,
+“Collaborative Research: HSI Implementation and Evaluation Project:
+Providing Equitable Access of Fundamental Data Analytical Skills to STEM
+Students with a Theme-Based Approach,” 2023-2028, PENDING.</li>
+<li>Principal Investigator, University of California, Office of the
+President (Innovative Learning Technology Initiative), “Online
+Instruction for Introduction to Statistics - STAT 100AB,” 2018-2023,
+$210,000.</li>
+<li>Other Professional, National Aeronautics and Space Administration
+(NASA MIRO FIELDS), “Fellowships and Internships in Extremely Large Data
+Sets (FIELDS): A Training and Research Program in Big Data and
+Visualization” (PI B. Mobasher, Physics and Astronomy), 2015-2020,
+$4,444,837.</li>
+<li>Principal Investigator, University of California, Riverside (UCR
+Regents Faculty Fellowship), “A sequential stopping rule for
+high-dimensional Markov chain Monte Carlo,” 2014-2015, $6,000.</li>
+<li>Principal Investigator, National Science Foundation (NSF-DMS,
+Statistics), “Collaborative research: Developing a theoretical and
+methodological framework for high-dimensional Markov chain Monte Carlo,”
+2013-2016, $99,998.</li>
 </ul>
 
 
